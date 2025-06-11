@@ -1,0 +1,12 @@
+portfolio-website/
+│
+├── index.html              # Your main HTML file (already complete)
+├── resume.pdf              # Your resume file to be linked in the website
+├── /assets/                # Folder for assets like images, icons, etc.
+│   └── profile.jpg         # (Optional) your profile photo
+├── /css/                   # Optional if you separate CSS later
+│   └── style.css
+├── /js/                    # Optional for external JavaScript
+│   └── typing.js
+├── README.md               # Project documentation
+└── .gitignore              # (Optional) for GitHub use

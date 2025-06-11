@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lakshmi Narayana Buragala | Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #0a192f;
+      color: #ccd6f6;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #0a192f;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: #64ffda;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      padding: 120px 20px 60px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: #8892b0;
+      font-size: 20px;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 32px;
+      color: #64ffda;
+      margin-bottom: 20px;
+    }
+
+    .project-card {
+      background-color: #112240;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .project-card a {
+      color: #64ffda;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #0a192f;
+      color: #8892b0;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 32px;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <header>
+    <div class="container">
+      <h1>Lakshmi Narayana Buragala</h1>
+      <p id="typing"></p>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>I am a passionate data science student with strong analytical and programming skills, actively building real-world projects in machine learning, data analysis, and automation. I'm eager to apply my knowledge in a professional environment and contribute to solving meaningful problems through data-driven solutions.
+</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="project-card">
+        <h3>Location Based Alarm System</h3>
+        <p>A smart mobile application that triggers alarms or notifications when the user reaches or leaves a specific geographic location. Built using GPS and geofencing technology, this system is ideal for reminders like "Wake me up when I reach my stop" or location-based task alerts.
+
+</p>
+        <a href="https://github.com/Lachi9959/Location-Based-Alarm-System.git">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>Image Classifier</h3>
+        <p>A deep learning model built using PyTorch to classify images from the CIFAR-10 dataset into 10 different categories. It uses Convolutional Neural Networks (CNNs) for accurate and efficient image recognition.</p>
+        <a href="https://github.com/Lachi9959/image-classification-Task2.git">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>Data Pipeline</h3>
+        <p>An automated ETL (Extract, Transform, Load) pipeline developed in Python to collect, clean, and store data efficiently. Designed for scalability and integration with machine learning workflows.</p>
+        <a href="https://github.com/Lachi9959/data-pipeline-Task1.git">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:lakshminarayanaburugula@gmail.com">lakshminarayanaburugula@gmail.com</a></p>
+      <p>GitHub: <a href="https://github.com/lachi9959">github.com/lachi9959</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/lakshminarayana-buragala-83a03a344">linkedin.com/in/lakshminarayana-buragala-83a03a344</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Lakshmi Narayana Buragala</p>
+    </div>
+  </footer>
+
+  <script>
+    const roles = ["Data Scientist", "Data Analyst", "Data Engineer"];
+    let index = 0, charIndex = 0;
+
+    function type() {
+      const text = roles[index];
+      const typingElement = document.getElementById("typing");
+      typingElement.textContent = text.substring(0, charIndex++);
+
+      if (charIndex > text.length) {
+        index = (index + 1) % roles.length;
+        charIndex = 0;
+        setTimeout(type, 1000);
+      } else {
+        setTimeout(type, 100);
+      }
+    }
+
+    type();
+  </script>
+</body>
+</html>
