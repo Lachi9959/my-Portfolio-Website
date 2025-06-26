@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +8,7 @@
   <title>Lakshmi Narayana Buragala | Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Helvetica Neue', sans-serif;
@@ -21,8 +19,7 @@
 
     nav {
       position: fixed;
-      top: 0;
-      width: 100%;
+      top: 0; width: 100%;
       background-color: #0a192f;
       padding: 20px;
       display: flex;
@@ -46,15 +43,9 @@
       text-align: center;
     }
 
-    header h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
+    header h1 { font-size: 48px; margin-bottom: 10px; }
 
-    header p {
-      color: #8892b0;
-      font-size: 20px;
-    }
+    header p { color: #8892b0; font-size: 20px; }
 
     section {
       padding: 60px 20px;
@@ -68,17 +59,89 @@
       margin-bottom: 20px;
     }
 
-    .project-card {
+    .education-card, .project-card {
       background-color: #112240;
       padding: 20px;
       border-radius: 10px;
       margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .project-card a {
+    .education-card img {
+      width: 100px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background-color: #0a192f;
+      border: 1px solid #64ffda;
       color: #64ffda;
-      display: inline-block;
-      margin-top: 10px;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-card img {
+      display: block;
+      margin: 0 auto 10px;
+      width: 50px;
+      height: auto;
+    }
+
+    .skill-card:hover {
+      transform: scale(1.05);
+      background-color: #1c2b4a;
+    }
+
+    /* === Projects Image Grid === */
+    .projects-grid {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .projects-grid img {
+      width: 200px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .projects-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .contact-icons img {
+      width: 40px;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-icons img:hover {
+      transform: scale(1.1);
     }
 
     footer {
@@ -90,21 +153,20 @@
     }
 
     @media (max-width: 768px) {
-      header h1 {
-        font-size: 32px;
-      }
-
-      nav {
-        flex-direction: column;
-        gap: 10px;
-      }
+      header h1 { font-size: 32px; }
+      nav { flex-direction: column; gap: 10px; }
+      .education-card { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
   <nav>
     <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
+    <a href="#resume">Resume</a>
     <a href="#contact">Contact</a>
   </nav>
 
@@ -116,49 +178,124 @@
   </header>
 
   <section id="about">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>I am a passionate data science student with strong analytical and programming skills, actively building real-world projects in machine learning, data analysis, and automation. I'm eager to apply my knowledge in a professional environment and contribute to solving meaningful problems through data-driven solutions.
-</p>
+    <h2>About Me</h2>
+    <p>I’m a passionate Data Science student with a strong interest in turning raw data into meaningful insights. My portfolio showcases hands-on projects involving data analysis, machine learning, and AI, reflecting both academic learning and practical experience. I’m continuously exploring real-world problems, working with Python, SQL, and tools like Pandas, Scikit-learn, and Tableau to build data-driven solutions. Feel free to explore my certifications, simulations, and projects to see my journey in data science.</p>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="education-card">
+      <img src="assets/college.png" alt="College">
+      <p><strong>B.Tech in CSE(Artificial intelligence & Data science) </strong><br>kallam haranadhareddy institute of technology, AP<br>2023 – 2027</p>
+    </div>
+    <div class="education-card">
+      <img src="assets/intermediate.png" alt="Intermediate">
+      <p><strong>Intermediate (MPC)</strong><br>NRI junior college, AP<br>2021 – 2023</p>
     </div>
   </section>
 
-  <section id="projects">
-    <div class="container">
-      <h2>Projects</h2>
-      <div class="project-card">
-        <h3>Location Based Alarm System</h3>
-        <p>A smart mobile application that triggers alarms or notifications when the user reaches or leaves a specific geographic location. Built using GPS and geofencing technology, this system is ideal for reminders like "Wake me up when I reach my stop" or location-based task alerts.
-
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <div class="education-card">
+      <img src="assets/certificate1.png" alt="Certificate">
+      <p><strong>Solutions Architecture Job Simulation
+</strong><br>amazon forage AWS<br>Issued: April 2025
 </p>
-        <a href="https://github.com/Lachi9959/Location-Based-Alarm-System.git">View Project</a>
-      </div>
-      <div class="project-card">
-        <h3>Image Classifier</h3>
-        <p>A deep learning model built using PyTorch to classify images from the CIFAR-10 dataset into 10 different categories. It uses Convolutional Neural Networks (CNNs) for accurate and efficient image recognition.</p>
-        <a href="https://github.com/Lachi9959/image-classification-Task2.git">View Project</a>
-      </div>
-      <div class="project-card">
-        <h3>Data Pipeline</h3>
-        <p>An automated ETL (Extract, Transform, Load) pipeline developed in Python to collect, clean, and store data efficiently. Designed for scalability and integration with machine learning workflows.</p>
-        <a href="https://github.com/Lachi9959/data-pipeline-Task1.git">View Project</a>
-      </div>
+    </div>
+    <div class="education-card">
+      <img src="assets/certificate2.png" alt="Certificate">
+      <p><strong>Generative AI in Action</strong><br>IBM SkillsBuild
+<br>Issued: May 2025</p>
+    </div>
+ </div>
+    <div class="education-card">
+      <img src="assets/certificate3.png" alt="Certificate">
+      <p><strong>Data Analysis with Python</strong><br>InfosysSpringboard
+<br>Issued: May 2025</p>
+    </div>
+ <div class="education-card">
+      <img src="assets/certificate4.png" alt="Certificate">
+      <p><strong>Data Visualisation</strong><br>TATA forage AWS
+<br>Issued: May 2025</p>
+    </div>
+ <div class="education-card">
+      <img src="assets/certificate5.png" alt="Certificate">
+      <p><strong>Python Programming</strong><br>CODETANTRA
+<br>Issued: Jul 2024</p>
+    </div>
+
+
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card"><img src="assets/excel.png" alt="Excel">Excel</div>
+      <div class="skill-card"><img src="assets/sql.png" alt="SQL">SQL</div>
+      <div class="skill-card"><img src="assets/python.png" alt="Python">Python</div>
+      <div class="skill-card"><img src="assets/java.png" alt="Java">Java</div>
+      <div class="skill-card"><img src="assets/numpy.png" alt="NumPy">NumPy</div>
+      <div class="skill-card"><img src="assets/pandas.png" alt="Pandas">Pandas</div>
+      <div class="skill-card"><img src="assets/dbms.png" alt="DBMS">DBMS</div>
+      <div class="skill-card"><img src="assets/powerbi.png" alt="Power BI">Power BI</div>
+      <div class="skill-card"><img src="assets/github.png" alt="GitHub">GitHub</div>
+      <div class="skill-card"><img src="assets/statistics.png" alt="Statistics">Statistics</div>
     </div>
   </section>
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects-grid">
+    <div class="project-item">
+      <a href="https://github.com/Lachi9959/Location-Based-Alarm-System.git" target="_blank">
+        <img src="assets/alarm.jpg" alt="Location Alarm" />
+      </a>
+      <p>Location Based Alarm</p>
+    </div>
+    <div class="project-item">
+      <a href="https://github.com/Lachi9959/image-classification-Task2.git" target="_blank">
+        <img src="assets/classifier.jpg" alt="Image Classifier" />
+      </a>
+      <p>Image Classifier</p>
+    </div>
+    <div class="project-item">
+      <a href="https://github.com/Lachi9959/data-pipeline-Task1.git" target="_blank">
+        <img src="assets/pipeline.jpg" alt="Data Pipeline" />
+      </a>
+      <p>Data Pipeline</p>
+    </div>
+  </div>
+</section>
+
+<section id="resume">
+  <h2>Resume</h2>
+  <div class="education-card">
+    <a href="https://drive.google.com/file/d/1Kp0EAs6bkMoOaBC0I-n5SRFTDCCVjmLp/view?usp=drive_link" target="_blank">
+      <img src="assets/resume_preview.png" alt="Resume Preview" />
+    </a>
+    <p>Click on the image to view or download my latest resume.</p>
+  </div>
+</section>
+<!-- ✅ Resume Section Ends -->
+
+
 
   <section id="contact">
-    <div class="container">
-      <h2>Contact Me</h2>
-      <p>Email: <a href="mailto:lakshminarayanaburugula@gmail.com">lakshminarayanaburugula@gmail.com</a></p>
-      <p>GitHub: <a href="https://github.com/lachi9959">github.com/lachi9959</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/lakshminarayana-buragala-83a03a344">linkedin.com/in/lakshminarayana-buragala-83a03a344</a></p>
+    <h2>Contact Me</h2>
+    <div class="contact-icons">
+      <a href="mailto:lakshminarayanaburugula@gmail.com" target="_blank">
+        <img src="assets/email.png" alt="Email">
+      </a>
+      <a href="https://linkedin.com/in/lakshminarayana-buragala-83a03a344" target="_blank">
+        <img src="assets/linkedin.png" alt="LinkedIn">
+      </a>
+      <a href="https://github.com/lachi9959" target="_blank">
+        <img src="assets/github.png" alt="GitHub">
+      </a>
     </div>
   </section>
 
   <footer>
-    <div class="container">
-      <p>© 2025 Lakshmi Narayana Buragala</p>
-    </div>
+    <p>© 2025 Lakshmi Narayana Buragala</p>
   </footer>
 
   <script>
