@@ -1,322 +1,913 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lakshmi Narayana Buragala | Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lakshmi Narayana Buragala — Portfolio</title>
+<meta name="description" content="Aspiring Data Scientist & Data Analyst | Published Researcher in Computer Vision — Portfolio of Lakshmi Narayana Buragala" />
 
-    body {
-      font-family: 'Helvetica Neue', sans-serif;
-      background-color: #0a192f;
-      color: #ccd6f6;
-      line-height: 1.6;
-    }
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    nav {
-      position: fixed;
-      top: 0; width: 100%;
-      background-color: #0a192f;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      z-index: 1000;
-    }
+<!-- Tailwind (CDN, no build step) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          accent: {
+            50: '#ecfeff', 100: '#cffafe', 200: '#a5f3fc', 300: '#67e8f9',
+            400: '#22d3ee', 500: '#06b6d4', 600: '#0891b2', 700: '#0e7490',
+            800: '#155e75', 900: '#164e63',
+          },
+        },
+      },
+    },
+  };
+</script>
 
-    nav a {
-      color: #64ffda;
-      text-decoration: none;
-      font-weight: bold;
-    }
+<!-- Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 
-    nav a:hover {
-      text-decoration: underline;
-    }
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #e5e7eb;
+    background: #0a0a0a;
+  }
+  .font-display { font-family: 'Space Grotesk', system-ui, sans-serif; }
+  ::selection { background: #06b6d4; color: #0a0a0a; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #0a0a0a; }
+  ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3a3a3a; }
 
-    header {
-      padding: 120px 20px 60px;
-      text-align: center;
-    }
+  /* Scroll reveal (mimics the original framer-motion whileInView) */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
 
-    header h1 { font-size: 48px; margin-bottom: 10px; }
+  @keyframes floaty { 0%,100% { transform: translateY(0px);} 50% { transform: translateY(-20px);} }
+  .animate-float { animation: floaty 6s ease-in-out infinite; }
 
-    header p { color: #8892b0; font-size: 20px; }
-
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h2 {
-      font-size: 32px;
-      color: #64ffda;
-      margin-bottom: 20px;
-    }
-
-    .education-card, .project-card {
-      background-color: #112240;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .education-card img {
-      width: 100px;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 20px;
-    }
-
-    .skill-card {
-      background-color: #0a192f;
-      border: 1px solid #64ffda;
-      color: #64ffda;
-      padding: 15px;
-      border-radius: 8px;
-      text-align: center;
-      font-weight: bold;
-      transition: transform 0.3s ease;
-    }
-
-    .skill-card img {
-      display: block;
-      margin: 0 auto 10px;
-      width: 50px;
-      height: auto;
-    }
-
-    .skill-card:hover {
-      transform: scale(1.05);
-      background-color: #1c2b4a;
-    }
-
-    /* === Projects Image Grid === */
-    .projects-grid {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .projects-grid img {
-      width: 200px;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
-
-    .projects-grid img:hover {
-      transform: scale(1.05);
-    }
-
-    .contact-icons {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 20px;
-    }
-
-    .contact-icons img {
-      width: 40px;
-      height: auto;
-      transition: transform 0.3s ease;
-    }
-
-    .contact-icons img:hover {
-      transform: scale(1.1);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #0a192f;
-      color: #8892b0;
-      font-size: 14px;
-    }
-
-    @media (max-width: 768px) {
-      header h1 { font-size: 32px; }
-      nav { flex-direction: column; gap: 10px; }
-      .education-card { flex-direction: column; text-align: center; }
-    }
-  </style>
+  [data-lucide] { display: inline-block; }
+</style>
 </head>
-<body>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#resume">Resume</a>
-    <a href="#contact">Contact</a>
-  </nav>
 
-  <header>
-    <div class="container">
-      <h1>Lakshmi Narayana Buragala</h1>
-      <p id="typing"></p>
-    </div>
-  </header>
+<body class="bg-[#0a0a0a]">
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I’m a passionate Data Science student with a strong interest in turning raw data into meaningful insights. My portfolio showcases hands-on projects involving data analysis, machine learning, and AI, reflecting both academic learning and practical experience. I’m continuously exploring real-world problems, working with Python, SQL, and tools like Pandas, Scikit-learn, and Tableau to build data-driven solutions. Feel free to explore my certifications, simulations, and projects to see my journey in data science.</p>
-  </section>
+<!-- ============ NAVBAR ============ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <a href="#home" class="nav-link font-display text-lg lg:text-xl font-bold text-white tracking-tight">LNB</a>
 
-  <section id="education">
-    <h2>Education</h2>
-    <div class="education-card">
-      <img src="assets/college.png" alt="College">
-      <p><strong>B.Tech in CSE(Artificial intelligence & Data science) </strong><br>kallam haranadhareddy institute of technology, AP<br>2023 – 2027</p>
-    </div>
-    <div class="education-card">
-      <img src="assets/intermediate.png" alt="Intermediate">
-      <p><strong>Intermediate (MPC)</strong><br>NRI junior college, AP<br>2021 – 2023</p>
-    </div>
-  </section>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#home" class="nav-link text-sm text-gray-400 hover:text-white transition-colors duration-200 font-medium">Home</a>
+        <a href="#about" class="nav-link text-sm text-gray-400 hover:text-white transition-colors duration-200 font-medium">About</a>
+        <a href="#experience" class="nav-link text-sm text-gray-400 hover:text-white transition-colors duration-200 font-medium">Experience</a>
+        <a href="#projects" class="nav-link text-sm text-gray-400 hover:text-white transition-colors duration-200 font-medium">Projects</a>
+        <a href="#skills" class="nav-link text-sm text-gray-400 hover:text-white transition-colors duration-200 font-medium">Skills</a>
+        <a href="#resume" class="nav-link text-sm text-gray-400 hover:text-white transition-colors duration-200 font-medium">Resume</a>
+        <a href="#contact" class="nav-link text-sm font-medium text-[#0a0a0a] bg-accent-400 hover:bg-accent-300 px-5 py-2 rounded-full transition-colors duration-200">Get in Touch</a>
+      </div>
 
-  <section id="certifications">
-    <h2>Certifications</h2>
-    <div class="education-card">
-      <img src="assets/certificate1.png" alt="Certificate">
-      <p><strong>Solutions Architecture Job Simulation
-</strong><br>amazon forage AWS<br>Issued: April 2025
-</p>
-    </div>
-    <div class="education-card">
-      <img src="assets/certificate2.png" alt="Certificate">
-      <p><strong>Generative AI in Action</strong><br>IBM SkillsBuild
-<br>Issued: May 2025</p>
-    </div>
- </div>
-    <div class="education-card">
-      <img src="assets/certificate3.png" alt="Certificate">
-      <p><strong>Data Analysis with Python</strong><br>InfosysSpringboard
-<br>Issued: May 2025</p>
-    </div>
- <div class="education-card">
-      <img src="assets/certificate4.png" alt="Certificate">
-      <p><strong>Data Visualisation</strong><br>TATA forage AWS
-<br>Issued: May 2025</p>
-    </div>
- <div class="education-card">
-      <img src="assets/certificate5.png" alt="Certificate">
-      <p><strong>Python Programming</strong><br>CODETANTRA
-<br>Issued: Jul 2024</p>
-    </div>
-
-
-  </section>
-
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card"><img src="assets/excel.png" alt="Excel">Excel</div>
-      <div class="skill-card"><img src="assets/sql.png" alt="SQL">SQL</div>
-      <div class="skill-card"><img src="assets/python.png" alt="Python">Python</div>
-      <div class="skill-card"><img src="assets/java.png" alt="Java">Java</div>
-      <div class="skill-card"><img src="assets/numpy.png" alt="NumPy">NumPy</div>
-      <div class="skill-card"><img src="assets/pandas.png" alt="Pandas">Pandas</div>
-      <div class="skill-card"><img src="assets/dbms.png" alt="DBMS">DBMS</div>
-      <div class="skill-card"><img src="assets/powerbi.png" alt="Power BI">Power BI</div>
-      <div class="skill-card"><img src="assets/github.png" alt="GitHub">GitHub</div>
-      <div class="skill-card"><img src="assets/statistics.png" alt="Statistics">Statistics</div>
-    </div>
-  </section>
-<section id="projects">
-  <h2>Projects</h2>
-  <div class="projects-grid">
-    <div class="project-item">
-      <a href="https://github.com/Lachi9959/Location-Based-Alarm-System.git" target="_blank">
-        <img src="assets/alarm.jpg" alt="Location Alarm" />
-      </a>
-      <p>Location Based Alarm</p>
-    </div>
-    <div class="project-item">
-      <a href="https://github.com/Lachi9959/image-classification-Task2.git" target="_blank">
-        <img src="assets/classifier.jpg" alt="Image Classifier" />
-      </a>
-      <p>Image Classifier</p>
-    </div>
-    <div class="project-item">
-      <a href="https://github.com/Lachi9959/data-pipeline-Task1.git" target="_blank">
-        <img src="assets/pipeline.jpg" alt="Data Pipeline" />
-      </a>
-      <p>Data Pipeline</p>
+      <button id="mobileToggle" class="md:hidden p-2 text-white" aria-label="Toggle menu">
+        <i data-lucide="menu" id="iconMenu"></i>
+        <i data-lucide="x" id="iconClose" class="hidden"></i>
+      </button>
     </div>
   </div>
-</section>
 
-<section id="resume">
-  <h2>Resume</h2>
-  <div class="education-card">
-    <a href="https://drive.google.com/file/d/1Kp0EAs6bkMoOaBC0I-n5SRFTDCCVjmLp/view?usp=drive_link" target="_blank">
-      <img src="assets/resume_preview.png" alt="Resume Preview" />
+  <div id="mobileMenu" class="hidden md:hidden bg-[#0a0a0a]/95 backdrop-blur-lg border-t border-white/5">
+    <div class="px-6 py-4 space-y-3">
+      <a href="#home" class="nav-link block text-sm text-gray-400 hover:text-white transition-colors py-1 font-medium">Home</a>
+      <a href="#about" class="nav-link block text-sm text-gray-400 hover:text-white transition-colors py-1 font-medium">About</a>
+      <a href="#experience" class="nav-link block text-sm text-gray-400 hover:text-white transition-colors py-1 font-medium">Experience</a>
+      <a href="#projects" class="nav-link block text-sm text-gray-400 hover:text-white transition-colors py-1 font-medium">Projects</a>
+      <a href="#skills" class="nav-link block text-sm text-gray-400 hover:text-white transition-colors py-1 font-medium">Skills</a>
+      <a href="#resume" class="nav-link block text-sm text-gray-400 hover:text-white transition-colors py-1 font-medium">Resume</a>
+      <a href="#contact" class="nav-link inline-block text-sm font-medium text-[#0a0a0a] bg-accent-400 px-5 py-2 rounded-full mt-2">Get in Touch</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a] pt-20">
+  <div class="absolute inset-0">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-700/10 rounded-full blur-3xl"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03)_0%,transparent_70%)]"></div>
+  </div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+      <div class="lg:col-span-3 text-center lg:text-left">
+        <div class="mb-4">
+          <span class="inline-flex items-center gap-2 text-sm font-medium text-accent-400 bg-accent-400/10 px-4 py-1.5 rounded-full">
+            <span class="w-2 h-2 bg-accent-400 rounded-full animate-pulse"></span>
+            Hi there!
+          </span>
+        </div>
+
+        <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-4">
+          Lakshmi Narayana Buragala
+        </h1>
+
+        <p class="text-base md:text-lg text-accent-300 font-medium mb-4">
+          Final-Year B.Tech CS (AI &amp; Data Science) | Aspiring Data Scientist &amp; Data Analyst
+        </p>
+
+        <p class="text-sm md:text-base text-gray-400 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+          Final-year student with hands-on experience in Python, machine learning, deep learning, and data engineering. Published researcher in low-light image enhancement (computer vision), seeking an entry-level Data Scientist / Data Analyst role to apply strong analytical skills to real-world, production-scale problems.
+        </p>
+
+        <div class="flex flex-wrap gap-2 justify-center lg:justify-start mb-8">
+          <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">Python</span>
+          <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">SQL</span>
+          <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">Machine Learning</span>
+          <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">PyTorch</span>
+          <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">Power BI</span>
+          <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">Data Analysis</span>
+          <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">ETL Pipelines</span>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+          <a href="#contact" class="nav-link inline-flex items-center gap-2 px-6 py-3 bg-accent-400 text-[#0a0a0a] text-sm font-semibold rounded-full hover:bg-accent-300 transition-colors duration-200">
+            Get in Touch
+          </a>
+          <a href="assets/resume.pdf" download class="inline-flex items-center gap-2 px-6 py-3 bg-white/5 text-white text-sm font-medium rounded-full border border-white/10 hover:bg-white/10 transition-colors duration-200">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            Resume
+          </a>
+          <div class="flex items-center gap-2 ml-2">
+            <a href="https://github.com/lachi9959" target="_blank" rel="noopener noreferrer" class="p-2.5 text-gray-400 hover:text-white hover:bg-white/5 rounded-full transition-colors duration-200" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/lakshmi-narayana-buragala" target="_blank" rel="noopener noreferrer" class="p-2.5 text-gray-400 hover:text-white hover:bg-white/5 rounded-full transition-colors duration-200" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+            </a>
+            <a href="mailto:lakshminarayanaburagala@gmail.com" class="p-2.5 text-gray-400 hover:text-white hover:bg-white/5 rounded-full transition-colors duration-200" aria-label="Email">
+              <i data-lucide="mail" class="w-[18px] h-[18px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2 flex justify-center">
+        <div class="relative animate-float">
+          <div class="absolute inset-0 bg-accent-400/20 rounded-full blur-2xl"></div>
+          <div class="relative w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-white/10">
+            <!-- Replace assets/avatar.jpg with your own photo -->
+            <img src="assets/avatar.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1633332755192-727a05cb40fc?w=600&auto=format&fit=crop&q=80';" alt="Lakshmi Narayana Buragala" class="w-full h-full object-cover" />
+          </div>
+          <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#0a0a0a] border border-white/10 rounded-full px-4 py-1.5 text-xs text-accent-300 font-medium whitespace-nowrap">
+            Available to join immediately
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+    <a href="#about" class="nav-link flex flex-col items-center gap-2 text-gray-500 hover:text-accent-400 transition-colors duration-200">
+      <span class="text-xs font-medium uppercase tracking-wider">Scroll</span>
+      <i data-lucide="arrow-down" class="w-4 h-4 animate-bounce"></i>
     </a>
-    <p>Click on the image to view or download my latest resume.</p>
   </div>
 </section>
-<!-- ✅ Resume Section Ends -->
 
+<!-- ============ ABOUT ============ -->
+<section id="about" class="py-24 lg:py-32 bg-[#0a0a0a]">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="mb-16 reveal">
+      <span class="text-xs font-medium text-accent-400 uppercase tracking-wider">About Me</span>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-3 tracking-tight">Who I Am</h2>
+    </div>
 
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div class="lg:col-span-2 reveal reveal-delay-1">
+        <p class="text-base lg:text-lg text-gray-300 leading-relaxed mb-6">
+          Final-year B.Tech Computer Science (AI &amp; Data Science) student with hands-on experience in Python, machine learning, deep learning, and data engineering. I am a published researcher in low-light image enhancement (computer vision), seeking an entry-level Data Scientist / Data Analyst / ML Engineer role to apply strong analytical and programming skills to real-world, production-scale problems.
+        </p>
+        <p class="text-base lg:text-lg text-gray-400 leading-relaxed mb-6">
+          I've worked across data science, computer vision research, and machine learning during five internships — including a research internship at VIT-AP University that led to a published preprint on low-light image enhancement (RNMT-Net).
+        </p>
+        <p class="text-base lg:text-lg text-gray-400 leading-relaxed">
+          Fast learner, team-oriented, and persistent — currently pursuing my degree while building real projects in computer vision, ETL pipelines, and geolocation-based apps.
+        </p>
 
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <div class="contact-icons">
-      <a href="mailto:lakshminarayanaburugula@gmail.com" target="_blank">
-        <img src="assets/email.png" alt="Email">
-      </a>
-      <a href="https://linkedin.com/in/lakshminarayana-buragala-83a03a344" target="_blank">
-        <img src="assets/linkedin.png" alt="LinkedIn">
-      </a>
-      <a href="https://github.com/lachi9959" target="_blank">
-        <img src="assets/github.png" alt="GitHub">
+        <div class="flex flex-wrap gap-4 mt-8 text-sm text-gray-400">
+          <div class="flex items-center gap-2">
+            <i data-lucide="map-pin" class="w-4 h-4 text-accent-400"></i>
+            <span>Guntur, Andhra Pradesh, India</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="graduation-cap" class="w-4 h-4 text-accent-400"></i>
+            <span>Computer Science (AI &amp; Data Science)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="briefcase" class="w-4 h-4 text-accent-400"></i>
+            <span>5 Internships</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-6 reveal reveal-delay-2">
+        <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="zap" class="w-4 h-4 text-accent-400"></i>
+            <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Strengths</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">Optimistic &amp; Persistent</span>
+            <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">Good Communication</span>
+            <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">Fast Learner</span>
+            <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">Team-Oriented</span>
+          </div>
+        </div>
+
+        <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6">
+          <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Languages</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">English</span>
+            <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">Telugu</span>
+            <span class="text-xs font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full">Hindi</span>
+          </div>
+        </div>
+
+        <div class="bg-accent-400/5 border border-accent-400/20 rounded-2xl p-6">
+          <h3 class="text-sm font-semibold text-accent-300 uppercase tracking-wider mb-2">Availability</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Available to join immediately. Open to relocation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience" class="py-24 lg:py-32 bg-[#0d0d0d]">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="mb-16 reveal">
+      <span class="text-xs font-medium text-accent-400 uppercase tracking-wider">My Journey</span>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-3 tracking-tight">Experience</h2>
+    </div>
+
+    <div class="relative">
+      <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-1/2"></div>
+
+      <div class="space-y-12">
+        <div class="relative pl-10 md:pl-0 md:w-1/2 md:pr-12 md:text-right reveal">
+          <div class="absolute top-2 w-3 h-3 rounded-full bg-accent-400 ring-4 ring-[#0d0d0d] left-0 md:left-auto md:-right-1.5"></div>
+          <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 hover:border-accent-400/30 transition-colors duration-300">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-2 md:justify-end">
+              <i data-lucide="calendar" class="w-3 h-3"></i>
+              <span>Jun 2026 — Jul 2026</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold text-white mb-1">Research Intern (VSRI-SENSE)</h3>
+            <p class="text-sm text-accent-300 font-medium mb-2">School of Electronics Engineering, VIT-AP University</p>
+            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-3 md:justify-end">
+              <i data-lucide="map-pin" class="w-3 h-3"></i>
+              <span>On-site</span>
+            </div>
+            <p class="text-sm text-gray-400 leading-relaxed">Conducted faculty-guided research on deep learning-based image processing, contributing to work later published as a preprint on low-light image enhancement (RNMT-Net). Applied computer vision and neural network techniques to real-world signal/image datasets.</p>
+          </div>
+        </div>
+
+        <div class="relative pl-10 md:pl-0 md:w-1/2 md:ml-auto md:pl-12 reveal">
+          <div class="absolute top-2 w-3 h-3 rounded-full bg-accent-400 ring-4 ring-[#0d0d0d] left-0 md:-left-1.5"></div>
+          <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 hover:border-accent-400/30 transition-colors duration-300">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-2">
+              <i data-lucide="calendar" class="w-3 h-3"></i>
+              <span>May 2025 — Jun 2025</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold text-white mb-1">Data Science Intern</h3>
+            <p class="text-sm text-accent-300 font-medium mb-2">Codtech IT Solutions Pvt. Ltd.</p>
+            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-3">
+              <i data-lucide="map-pin" class="w-3 h-3"></i>
+              <span>Remote</span>
+            </div>
+            <p class="text-sm text-gray-400 leading-relaxed">Engineered machine learning pipelines and developed interactive dashboards using Python and data visualization tools, improving model interpretability by 20%.</p>
+          </div>
+        </div>
+
+        <div class="relative pl-10 md:pl-0 md:w-1/2 md:pr-12 md:text-right reveal">
+          <div class="absolute top-2 w-3 h-3 rounded-full bg-accent-400 ring-4 ring-[#0d0d0d] left-0 md:left-auto md:-right-1.5"></div>
+          <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 hover:border-accent-400/30 transition-colors duration-300">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-2 md:justify-end">
+              <i data-lucide="calendar" class="w-3 h-3"></i>
+              <span>Jun 2025 (1 month)</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold text-white mb-1">Data Science Intern</h3>
+            <p class="text-sm text-accent-300 font-medium mb-2">StableCode</p>
+            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-3 md:justify-end">
+              <i data-lucide="map-pin" class="w-3 h-3"></i>
+              <span>Remote</span>
+            </div>
+            <p class="text-sm text-gray-400 leading-relaxed">Worked on data science tasks including data analysis and model support, contributing to backend automation and process efficiency improvements of 15%.</p>
+          </div>
+        </div>
+
+        <div class="relative pl-10 md:pl-0 md:w-1/2 md:ml-auto md:pl-12 reveal">
+          <div class="absolute top-2 w-3 h-3 rounded-full bg-accent-400 ring-4 ring-[#0d0d0d] left-0 md:-left-1.5"></div>
+          <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 hover:border-accent-400/30 transition-colors duration-300">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-2">
+              <i data-lucide="calendar" class="w-3 h-3"></i>
+              <span>Jun 2025 — Jul 2025</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold text-white mb-1">Artificial Intelligence / Machine Learning Intern</h3>
+            <p class="text-sm text-accent-300 font-medium mb-2">StaxTech</p>
+            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-3">
+              <i data-lucide="map-pin" class="w-3 h-3"></i>
+              <span>Remote</span>
+            </div>
+            <p class="text-sm text-gray-400 leading-relaxed">Built and tested AI/ML-driven project components, while also contributing to responsive UI integration, improving performance and cross-device compatibility by 25%.</p>
+          </div>
+        </div>
+
+        <div class="relative pl-10 md:pl-0 md:w-1/2 md:pr-12 md:text-right reveal">
+          <div class="absolute top-2 w-3 h-3 rounded-full bg-accent-400 ring-4 ring-[#0d0d0d] left-0 md:left-auto md:-right-1.5"></div>
+          <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 hover:border-accent-400/30 transition-colors duration-300">
+            <div class="flex items-center gap-2 text-xs text-gray-500 mb-2 md:justify-end">
+              <i data-lucide="calendar" class="w-3 h-3"></i>
+              <span>Jun 2025 — Jul 2025</span>
+            </div>
+            <h3 class="font-display text-lg font-semibold text-white mb-1">Machine Learning Intern</h3>
+            <p class="text-sm text-accent-300 font-medium mb-2">Prodigy InfoTech</p>
+            <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-3 md:justify-end">
+              <i data-lucide="map-pin" class="w-3 h-3"></i>
+              <span>Remote</span>
+            </div>
+            <p class="text-sm text-gray-400 leading-relaxed">Worked on real-world machine learning project tasks as part of a structured 1-month internship program, building practical model development and evaluation skills.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="py-24 lg:py-32 bg-[#0a0a0a]">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="mb-16 reveal">
+      <span class="text-xs font-medium text-accent-400 uppercase tracking-wider">Creator of</span>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-3 tracking-tight">Projects</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="group relative bg-white/[0.03] border border-white/5 rounded-2xl overflow-hidden hover:border-accent-400/30 transition-all duration-300 reveal">
+        <div class="aspect-[16/10] overflow-hidden bg-white/5">
+          <!-- Replace assets/project-location-alarm.jpg with your own screenshot -->
+          <img src="assets/project-location-alarm.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1524813686514-a57563d76751?w=800&auto=format&fit=crop&q=80';" alt="Location Alarm System" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300" loading="lazy" />
+        </div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-3">
+            <div class="p-2 bg-accent-400/10 rounded-lg">
+              <i data-lucide="folder" class="w-4 h-4 text-accent-400"></i>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href="https://github.com/lachi9959" target="_blank" rel="noopener noreferrer" class="p-1.5 text-gray-500 hover:text-white transition-colors" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white mb-2 group-hover:text-accent-300 transition-colors">Location Alarm System</h3>
+          <p class="text-sm text-gray-400 leading-relaxed mb-4">Python-based app using geolocation to detect proximity to target locations, triggering real-time alerts for location-based reminders and improved user safety.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">Python</span>
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">Geolocation API</span>
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">Notifications</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="group relative bg-white/[0.03] border border-white/5 rounded-2xl overflow-hidden hover:border-accent-400/30 transition-all duration-300 reveal reveal-delay-1">
+        <div class="aspect-[16/10] overflow-hidden bg-white/5">
+          <!-- Replace assets/project-image-classifier.jpg with your own screenshot -->
+          <img src="assets/project-image-classifier.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1555949963-ff7920837743?w=800&auto=format&fit=crop&q=80';" alt="Image Classifier (CIFAR-10)" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300" loading="lazy" />
+        </div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-3">
+            <div class="p-2 bg-accent-400/10 rounded-lg">
+              <i data-lucide="folder" class="w-4 h-4 text-accent-400"></i>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href="https://github.com/lachi9959" target="_blank" rel="noopener noreferrer" class="p-1.5 text-gray-500 hover:text-white transition-colors" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white mb-2 group-hover:text-accent-300 transition-colors">Image Classifier (CIFAR-10)</h3>
+          <p class="text-sm text-gray-400 leading-relaxed mb-4">CNN deep learning model built in PyTorch, classifying images into 10 categories with 82% accuracy.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">Python</span>
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">PyTorch</span>
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">CNN</span>
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">Deep Learning</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="group relative bg-white/[0.03] border border-white/5 rounded-2xl overflow-hidden hover:border-accent-400/30 transition-all duration-300 reveal reveal-delay-2">
+        <div class="aspect-[16/10] overflow-hidden bg-white/5">
+          <!-- Replace assets/project-data-pipeline.jpg with your own screenshot -->
+          <img src="assets/project-data-pipeline.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80';" alt="Automated Data Pipeline" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300" loading="lazy" />
+        </div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-3">
+            <div class="p-2 bg-accent-400/10 rounded-lg">
+              <i data-lucide="folder" class="w-4 h-4 text-accent-400"></i>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href="https://github.com/lachi9959" target="_blank" rel="noopener noreferrer" class="p-1.5 text-gray-500 hover:text-white transition-colors" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+              </a>
+            </div>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-white mb-2 group-hover:text-accent-300 transition-colors">Automated Data Pipeline</h3>
+          <p class="text-sm text-gray-400 leading-relaxed mb-4">ETL pipeline in Python/Pandas that extracts, transforms, and loads structured datasets into ML workflows, cutting preprocessing time by 30%.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">Python</span>
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">Pandas</span>
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">ETL</span>
+            <span class="text-xs font-medium text-gray-400 bg-white/5 border border-white/10 px-2.5 py-1 rounded-full">Data Pipelines</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="py-24 lg:py-32 bg-[#0d0d0d]">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="mb-16 reveal">
+      <span class="text-xs font-medium text-accent-400 uppercase tracking-wider">My Expertise</span>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-3 tracking-tight">Skills &amp; More</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 reveal">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="p-2 bg-accent-400/10 rounded-lg text-accent-400"><i data-lucide="code-2" class="w-[18px] h-[18px]"></i></div>
+          <h3 class="font-display text-base font-semibold text-white">Languages</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">Python</span>
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">Java</span>
+        </div>
+      </div>
+
+      <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 reveal reveal-delay-1">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="p-2 bg-accent-400/10 rounded-lg text-accent-400"><i data-lucide="layers" class="w-[18px] h-[18px]"></i></div>
+          <h3 class="font-display text-base font-semibold text-white">Libraries &amp; Frameworks</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">NumPy</span>
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">PyTorch</span>
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">Pandas</span>
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">Matplotlib</span>
+        </div>
+      </div>
+
+      <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 reveal reveal-delay-2">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="p-2 bg-accent-400/10 rounded-lg text-accent-400"><i data-lucide="wrench" class="w-[18px] h-[18px]"></i></div>
+          <h3 class="font-display text-base font-semibold text-white">Tools</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">Power BI</span>
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">Git/GitHub</span>
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">REST APIs</span>
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">MS Office</span>
+        </div>
+      </div>
+
+      <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 reveal">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="p-2 bg-accent-400/10 rounded-lg text-accent-400"><i data-lucide="database" class="w-[18px] h-[18px]"></i></div>
+          <h3 class="font-display text-base font-semibold text-white">Databases</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">SQL</span>
+        </div>
+      </div>
+
+      <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 reveal reveal-delay-1">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="p-2 bg-accent-400/10 rounded-lg text-accent-400"><i data-lucide="cloud" class="w-[18px] h-[18px]"></i></div>
+          <h3 class="font-display text-base font-semibold text-white">Cloud</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm font-medium text-gray-300 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full hover:border-accent-400/50 hover:text-accent-300 transition-colors duration-200">AWS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 reveal">
+        <h3 class="font-display text-base font-semibold text-white mb-5 uppercase tracking-wider">Education</h3>
+        <div class="space-y-4">
+          <div class="border-l-2 border-white/10 pl-4">
+            <h4 class="text-sm font-semibold text-white">B.Tech in Computer Science Engineering</h4>
+            <p class="text-xs text-gray-400 mt-0.5">Kallam Haranadhareddy Institute of Technology, JNTU Kakinada</p>
+            <div class="flex items-center justify-between mt-2">
+              <span class="text-xs text-gray-500">2021 - 2025</span>
+              <span class="text-xs text-accent-300 font-medium">Current SGPA: 8.8/10</span>
+            </div>
+          </div>
+          <div class="border-l-2 border-white/10 pl-4">
+            <h4 class="text-sm font-semibold text-white">Intermediate (Class XII)</h4>
+            <p class="text-xs text-gray-400 mt-0.5">NRI Junior College, Guntur</p>
+            <div class="flex items-center justify-between mt-2">
+              <span class="text-xs text-gray-500">2019 - 2021</span>
+              <span class="text-xs text-accent-300 font-medium">GPA: 8.8/10</span>
+            </div>
+          </div>
+          <div class="border-l-2 border-white/10 pl-4">
+            <h4 class="text-sm font-semibold text-white">S.S.C (Class X)</h4>
+            <p class="text-xs text-gray-400 mt-0.5">Krishnaveni High School, Macherla</p>
+            <div class="flex items-center justify-between mt-2">
+              <span class="text-xs text-gray-500">2019</span>
+              <span class="text-xs text-accent-300 font-medium">GPA: 10/10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 reveal reveal-delay-1">
+        <h3 class="font-display text-base font-semibold text-white mb-5 uppercase tracking-wider">Certifications</h3>
+        <div class="flex flex-wrap gap-2">
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">Data Analysis with Python</p>
+            <p class="text-xs text-gray-500 mt-0.5">Infosys Springboard</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">Artificial Intelligence &amp; Machine Learning</p>
+            <p class="text-xs text-gray-500 mt-0.5">SmartBridge / APSCHE</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">Generative AI with IBM Cloud</p>
+            <p class="text-xs text-gray-500 mt-0.5">SmartInternz / APSCHE</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">AI-ML Virtual Internship</p>
+            <p class="text-xs text-gray-500 mt-0.5">AICTE EduSkills &times; Google for Developers</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">Generative AI</p>
+            <p class="text-xs text-gray-500 mt-0.5">Google Cloud (via L4G)</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">Introduction to Artificial Intelligence</p>
+            <p class="text-xs text-gray-500 mt-0.5">Simplilearn</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">Python Programming</p>
+            <p class="text-xs text-gray-500 mt-0.5">CodeTantra</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">Java Full Stack Development</p>
+            <p class="text-xs text-gray-500 mt-0.5">CodeTantra</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">AWS Solutions Architect (Simulation)</p>
+            <p class="text-xs text-gray-500 mt-0.5">Forage</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">Generative AI in Action</p>
+            <p class="text-xs text-gray-500 mt-0.5">IBM</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <p class="text-xs font-medium text-gray-200">Data Visualization</p>
+            <p class="text-xs text-gray-500 mt-0.5">Tata Insights</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white/[0.03] border border-white/5 rounded-2xl p-6 reveal reveal-delay-2">
+        <h3 class="font-display text-base font-semibold text-white mb-5 uppercase tracking-wider">Achievements</h3>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-accent-400 mt-1.5 flex-shrink-0"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-200">Published Researcher — RNMT-Net</p>
+              <p class="text-xs text-gray-500 mt-0.5">Low-light image enhancement preprint on engrXiv, from research internship at VIT-AP University (DOI: 10.31224/7830)</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-accent-400 mt-1.5 flex-shrink-0"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-200">Top 20% of Branch</p>
+              <p class="text-xs text-gray-500 mt-0.5">Ranked in top 20% of branch (AI &amp; Data Science) by academic performance, KHIT</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-accent-400 mt-1.5 flex-shrink-0"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-200">Synapse2k25 Hackathon</p>
+              <p class="text-xs text-gray-500 mt-0.5">Participated in national-level hackathon at Mohan Babu University</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-accent-400 mt-1.5 flex-shrink-0"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-200">Agentic AI Day</p>
+              <p class="text-xs text-gray-500 mt-0.5">Participated in national-level hackathon by Google Cloud</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-2 h-2 rounded-full bg-accent-400 mt-1.5 flex-shrink-0"></div>
+            <div>
+              <p class="text-sm font-medium text-gray-200">InnovateX — 9th Rank</p>
+              <p class="text-xs text-gray-500 mt-0.5">Secured 9th rank at InnovateX, VIT-AP University</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESUME (for recruiters) ============ -->
+<section id="resume" class="py-24 lg:py-32 bg-[#0a0a0a]">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="mb-16 reveal">
+      <span class="text-xs font-medium text-accent-400 uppercase tracking-wider">For Recruiters</span>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-3 tracking-tight">Resume</h2>
+    </div>
+
+    <div class="reveal reveal-delay-1 bg-white/[0.03] border border-white/5 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="p-4 bg-accent-400/10 rounded-xl text-accent-400">
+          <i data-lucide="file-text" class="w-7 h-7"></i>
+        </div>
+        <div>
+          <h3 class="text-white font-display text-lg font-semibold">Lakshmi Narayana Buragala — Resume</h3>
+          <p class="text-sm text-gray-400 mt-1">PDF · ATS-Optimized · Click to download</p>
+        </div>
+      </div>
+      <a href="assets/resume.pdf" download class="inline-flex items-center gap-2 px-6 py-3 bg-accent-400 text-[#0a0a0a] text-sm font-semibold rounded-full hover:bg-accent-300 transition-colors duration-200 whitespace-nowrap">
+        <i data-lucide="download" class="w-4 h-4"></i>
+        Download Resume
       </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <p>© 2025 Lakshmi Narayana Buragala</p>
-  </footer>
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="py-24 lg:py-32 bg-[#0a0a0a]">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="mb-16 text-center reveal">
+      <span class="text-xs font-medium text-accent-400 uppercase tracking-wider">Get in Touch</span>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-3 tracking-tight max-w-2xl mx-auto">
+        Let's turn data into decisions — together
+      </h2>
+    </div>
 
-  <script>
-    const roles = ["Data Scientist", "Data Analyst", "Data Engineer"];
-    let index = 0, charIndex = 0;
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+      <div class="reveal reveal-delay-1">
+        <div class="space-y-5 mb-8">
+          <a href="mailto:lakshminarayanaburagala@gmail.com" class="flex items-center gap-4 group">
+            <div class="p-3 bg-white/5 border border-white/10 rounded-xl text-accent-400 group-hover:bg-accent-400/10 transition-colors">
+              <i data-lucide="mail" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500 uppercase tracking-wider">Email</p>
+              <p class="text-sm text-gray-200 group-hover:text-accent-300 transition-colors">lakshminarayanaburagala@gmail.com</p>
+            </div>
+          </a>
 
-    function type() {
-      const text = roles[index];
-      const typingElement = document.getElementById("typing");
-      typingElement.textContent = text.substring(0, charIndex++);
+          <a href="tel:+919133437144" class="flex items-center gap-4 group">
+            <div class="p-3 bg-white/5 border border-white/10 rounded-xl text-accent-400 group-hover:bg-accent-400/10 transition-colors">
+              <i data-lucide="phone" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500 uppercase tracking-wider">Phone</p>
+              <p class="text-sm text-gray-200 group-hover:text-accent-300 transition-colors">+91 91334 37144</p>
+            </div>
+          </a>
 
-      if (charIndex > text.length) {
-        index = (index + 1) % roles.length;
-        charIndex = 0;
-        setTimeout(type, 1000);
-      } else {
-        setTimeout(type, 100);
-      }
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-white/5 border border-white/10 rounded-xl text-accent-400">
+              <i data-lucide="map-pin" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500 uppercase tracking-wider">Location</p>
+              <p class="text-sm text-gray-200">Guntur, Andhra Pradesh, India</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="https://github.com/lachi9959" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg> GitHub
+          </a>
+          <a href="https://linkedin.com/in/lakshmi-narayana-buragala" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg> LinkedIn
+          </a>
+        </div>
+
+        <div class="mt-8 bg-accent-400/5 border border-accent-400/20 rounded-xl p-5">
+          <p class="text-sm text-gray-300 leading-relaxed">Available to join immediately. Open to relocation.</p>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div id="formSuccess" class="hidden flex-col items-center justify-center py-16 text-center bg-white/[0.03] border border-white/5 rounded-2xl">
+          <i data-lucide="check-circle" class="w-12 h-12 text-accent-400 mb-4"></i>
+          <h3 class="text-xl font-semibold text-white mb-2">Message Sent!</h3>
+          <p class="text-sm text-gray-400 mb-6">Thank you for reaching out. I will get back to you soon.</p>
+          <button id="sendAnother" class="text-sm font-medium text-accent-400 hover:text-accent-300 transition-colors">Send another message</button>
+        </div>
+
+        <form id="contactForm" class="space-y-5">
+          <!-- Delivers submissions to lakshminarayanaburagala@gmail.com via FormSubmit (no backend needed) -->
+          <input type="hidden" name="_subject" value="New portfolio contact message" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" style="display:none" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">Name</label>
+              <input type="text" name="name" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-accent-400/50 focus:border-transparent transition-all" placeholder="Your name" />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">Email</label>
+              <input type="email" name="email" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-accent-400/50 focus:border-transparent transition-all" placeholder="your@email.com" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">Subject</label>
+            <input type="text" name="subject" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-accent-400/50 focus:border-transparent transition-all" placeholder="What's this about?" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">Resume / CV (optional, recruiters)</label>
+            <input type="file" name="attachment" accept=".pdf,.doc,.docx" class="w-full text-sm text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border file:border-white/10 file:text-sm file:font-medium file:bg-white/5 file:text-gray-300 hover:file:bg-white/10 file:cursor-pointer cursor-pointer bg-white/5 border border-white/10 rounded-xl" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">Message</label>
+            <textarea name="message" required rows="5" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-accent-400/50 focus:border-transparent transition-all resize-none" placeholder="Tell me about your project or inquiry..."></textarea>
+          </div>
+          <button type="submit" id="submitBtn" class="inline-flex items-center gap-2 px-6 py-3 bg-accent-400 text-[#0a0a0a] text-sm font-semibold rounded-full hover:bg-accent-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            <span id="submitBtnText">Send Message</span>
+          </button>
+          <p id="formError" class="hidden text-sm text-red-400">Something went wrong. Please try again, or email directly at lakshminarayanaburagala@gmail.com.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="py-10 bg-[#0a0a0a] border-t border-white/5">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-2">
+        <span class="font-display text-base font-bold text-white">LNB</span>
+        <span class="text-sm text-gray-500">Lakshmi Narayana Buragala</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/lachi9959" target="_blank" rel="noopener noreferrer" class="p-2 text-gray-500 hover:text-accent-400 transition-colors" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.96.1-.75.4-1.25.72-1.54-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.09 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.15 0 1.55-.01 2.8-.01 3.18 0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/lakshmi-narayana-buragala" target="_blank" rel="noopener noreferrer" class="p-2 text-gray-500 hover:text-accent-400 transition-colors" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+        </a>
+        <a href="mailto:lakshminarayanaburagala@gmail.com" class="p-2 text-gray-500 hover:text-accent-400 transition-colors" aria-label="Email">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+    <div class="mt-8 pt-6 border-t border-white/5 text-center text-xs text-gray-600">
+      &copy; <span id="year"></span> Lakshmi Narayana Buragala. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- Icons ----
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide) lucide.createIcons();
+  });
+
+  // ---- Footer year ----
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---- Navbar scroll background ----
+  const navbar = document.getElementById('navbar');
+  function onScroll() {
+    if (window.scrollY > 30) {
+      navbar.classList.add('bg-[#0a0a0a]/90', 'backdrop-blur-lg', 'border-b', 'border-white/5');
+    } else {
+      navbar.classList.remove('bg-[#0a0a0a]/90', 'backdrop-blur-lg', 'border-b', 'border-white/5');
     }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-    type();
-  </script>
+  // ---- Mobile menu ----
+  const mobileToggle = document.getElementById('mobileToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const iconMenu = document.getElementById('iconMenu');
+  const iconClose = document.getElementById('iconClose');
+  mobileToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    iconMenu.classList.toggle('hidden');
+    iconClose.classList.toggle('hidden');
+  });
+
+  // ---- Smooth scroll + close mobile menu on nav click ----
+  document.querySelectorAll('.nav-link').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        mobileMenu.classList.add('hidden');
+        iconMenu.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        if (href === '#home') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  // ---- Scroll reveal animation ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '-40px' });
+  revealEls.forEach((el) => io.observe(el));
+
+  // ---- Contact form submission (FormSubmit.co — sends email, no backend required) ----
+  const CONTACT_EMAIL = 'lakshminarayanaburagala@gmail.com';
+  const contactForm = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+  const formError = document.getElementById('formError');
+  const submitBtn = document.getElementById('submitBtn');
+  const submitBtnText = document.getElementById('submitBtnText');
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    formError.classList.add('hidden');
+    submitBtn.disabled = true;
+    submitBtnText.textContent = 'Sending...';
+
+    try {
+      const formData = new FormData(contactForm);
+      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error('Request failed');
+
+      contactForm.classList.add('hidden');
+      formSuccess.classList.remove('hidden');
+      formSuccess.classList.add('flex');
+      contactForm.reset();
+    } catch (err) {
+      formError.classList.remove('hidden');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtnText.textContent = 'Send Message';
+    }
+  });
+
+  document.getElementById('sendAnother').addEventListener('click', () => {
+    formSuccess.classList.add('hidden');
+    formSuccess.classList.remove('flex');
+    contactForm.classList.remove('hidden');
+  });
+</script>
+
 </body>
 </html>
